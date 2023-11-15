@@ -1,0 +1,59 @@
+package snake.components;
+
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Snake {
+    private List<Point> snakeParts;
+    private int direction;
+    private final int SCALE; // Size of each segment
+
+    public Snake(int initialLength, int scale) {
+        SCALE = scale;
+        snakeParts = new ArrayList<>();
+        for (int i = 0; i < initialLength; i++) {
+            // Initialize the snake at the center of the board
+            snakeParts.add(new Point(0, -i));
+        }
+        direction = 0; // 0: up, 1: right, 2: down, 3: left
+    }
+
+    public void setDirection(int dir) {
+        direction = dir;
+    }
+
+    public void move() {
+        Point head = new Point(snakeParts.get(0));
+        switch (direction) {
+            case 0: // Up
+                head.y -= SCALE;
+                break;
+            case 1: // Right
+                head.x += SCALE;
+                break;
+            case 2: // Down
+                head.y += SCALE;
+                break;
+            case 3: // Left
+                head.x -= SCALE;
+                break;
+        }
+        snakeParts.add(0, head);
+        snakeParts.remove(snakeParts.size() - 1);
+    }
+
+    public void grow() {
+        snakeParts.add(new Point(snakeParts.get(snakeParts.size() - 1)));
+    }
+
+    public List<Point> getSnakeParts() {
+        return snakeParts;
+    }
+
+    public Point getHead() {
+        return snakeParts.get(0);
+    }
+
+    // Additional methods for collision detection, etc., can be added here
+}
