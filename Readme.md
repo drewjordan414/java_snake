@@ -11,6 +11,8 @@ This project was created as the final project for COMP 170 at Loyola University 
   - [Installing](#installing)
 - [Built With](#built-with)
 - [Authors](#authors)
+- [License](#license)
+- [Sources](#sources)
 
 ## Features
 
@@ -33,7 +35,7 @@ These instructions will help you get a copy of the project up and running on you
 1. **Clone the Repository:**
    
    ```bash
-   git clone https://github.com/yourusername/snake-game.git
+   git clone https://github.com/drewjordan414/java_snake.git
     ```
 
 2. **Open the Project:**
@@ -69,3 +71,11 @@ These instructions will help you get a copy of the project up and running on you
 
 ## Authors
 * Drew Jordan
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Sources
+* [Snake Game Tutorial](https://www.youtube.com/watch?v=bI6e6qjJ8JQ)
+* [Snake Geeks For Geeks](https://www.geeksforgeeks.org/design-snake-game/)
+* [Stack Exchange](https://codereview.stackexchange.com/questions/129719/java-snake-game)
