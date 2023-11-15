@@ -142,14 +142,22 @@ public class Board extends JPanel implements ActionListener {
 
     }
 
-    // Additional methods, including those for key event handling, can be added here
-
     // button to restart game when game over is ture
     public void restartGame() {
-        if (gameOver) {
-            initGame();
+    if (gameOver) {
+        if (timer != null) {
+            timer.stop(); // Stop the existing timer
         }
+
+        snake = new Snake(3, SCALE, WIDTH, HEIGHT); // Reset the snake
+        spawnApple(); // Respawn the apple
+        gameOver = false; // Reset the game over flag
+
+        timer = new Timer(100, this); // Create a new timer with a constant delay
+        timer.start(); // Start the timer
     }
+}
+
 
 
 }
