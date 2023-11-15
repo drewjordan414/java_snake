@@ -23,7 +23,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.snake.Main</mainClass> <!-- Replace with your main class -->
+                            <mainClass>snake.Main</mainClass> <!-- Replace with your main class -->
                         </manifest>
                     </archive>
                 </configuration>

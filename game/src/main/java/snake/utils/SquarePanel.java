@@ -1,3 +1,5 @@
+package snake.utils;
+
 import java.awt.Color;
 import javax.swing.JPanel;
 

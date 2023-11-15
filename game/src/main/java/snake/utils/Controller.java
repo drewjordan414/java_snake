@@ -1,3 +1,5 @@
+package snake.utils;
+
 import java.util.ArrayList;
 
 

@@ -1,3 +1,5 @@
+package snake.utils;
+
 public class Tuple {
     public  int x;
     public  int y;
