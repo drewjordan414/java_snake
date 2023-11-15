@@ -35,7 +35,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void initGame() {
-        snake = new Snake(3, SCALE);
+        snake = new Snake(3, SCALE, WIDTH, HEIGHT);
         spawnApple();
         gameOver = false;
         timer = new Timer(100, this);
@@ -89,8 +89,22 @@ public class Board extends JPanel implements ActionListener {
 
     private void checkCollisions() {
         // Implement collision logic (with walls or snake itself)
-        // Set gameOver to true if a collision occurs
+        Point head = snake.getHead();
+        // Check collision with the snake itself
+        for (int i = 1; i < snake.getSnakeParts().size(); i++) {
+            if (head.equals(snake.getSnakeParts().get(i))) {
+                gameOver = true;
+                return;
+            }
+        }
+
+        // Check collision with the walls
+        if (head.x < 0 || head.x >= WIDTH || head.y < 0 || head.y >= HEIGHT) {
+            gameOver = true;
+        }
+
     }
 
     // Additional methods, including those for key event handling, can be added here
+
 }
