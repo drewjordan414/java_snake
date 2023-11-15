@@ -1,3 +1,4 @@
+package snake.com.snake;
 import javax.swing.JFrame;
 
 public class Main {
