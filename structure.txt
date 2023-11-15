@@ -1,0 +1,16 @@
+java_snake (root directory)
+│--game
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   ├── snake
+│   │   │   │   ├── Main.java
+│   │   │   └── components
+│   │   │       ├── Board.java
+│   │   │       ├── Snake.java
+│   │   │       └── Apple.java
+│   │   └── resources
+│   └── test
+│       └── java
+└── pom.xml
+
