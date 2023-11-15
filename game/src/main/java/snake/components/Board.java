@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
+import java.awt.FontMetrics;
+
 
 public class Board extends JPanel implements ActionListener {
     private final int WIDTH = 800;
@@ -28,8 +30,33 @@ public class Board extends JPanel implements ActionListener {
 
         initGame();
         addKeyListener(new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
-                // Handle key events for snake direction change
+                if (gameOver) {
+                    if (e.getKeyCode() == KeyEvent.VK_R) {
+                        restartGame();
+                    }
+                } else {
+                    int currentDirection = snake.getDirection();
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP:
+                        case KeyEvent.VK_W:
+                            if (currentDirection != 2) snake.setDirection(0); // Up
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                        case KeyEvent.VK_D:
+                            if (currentDirection != 3) snake.setDirection(1); // Right
+                            break;
+                        case KeyEvent.VK_DOWN:
+                        case KeyEvent.VK_S:
+                            if (currentDirection != 0) snake.setDirection(2); // Down
+                            break;
+                        case KeyEvent.VK_LEFT:
+                        case KeyEvent.VK_A:
+                            if (currentDirection != 1) snake.setDirection(3); // Left
+                            break;
+                    }
+                }
             }
         });
     }
@@ -56,18 +83,28 @@ public class Board extends JPanel implements ActionListener {
 
     private void draw(Graphics g) {
         if (!gameOver) {
-            // Draw apple
+            // Draw the apple
             g.setColor(Color.RED);
             g.fillRect(apple.x, apple.y, SCALE, SCALE);
-
-            // Draw snake
+    
+            // Draw the snake
             g.setColor(Color.GREEN);
             for (Point p : snake.getSnakeParts()) {
                 g.fillRect(p.x, p.y, SCALE, SCALE);
             }
         } else {
-            // Display Game Over
+            // Game Over - Display the message
+            drawGameOver(g);
         }
+    }
+    
+    private void drawGameOver(Graphics g) {
+        String message = "Game Over. Press R to Restart";
+        g.setColor(Color.RED);
+        FontMetrics fm = g.getFontMetrics();
+        int x = (WIDTH - fm.stringWidth(message)) / 2;
+        int y = (HEIGHT / 2) + fm.getAscent();
+        g.drawString(message, x, y);
     }
 
     @Override
@@ -106,5 +143,13 @@ public class Board extends JPanel implements ActionListener {
     }
 
     // Additional methods, including those for key event handling, can be added here
+
+    // button to restart game when game over is ture
+    public void restartGame() {
+        if (gameOver) {
+            initGame();
+        }
+    }
+
 
 }
