@@ -28,6 +28,7 @@ These instructions will help you get a copy of the project up and running on you
 ### Prerequisites
 
 - Java Development Kit (JDK), version 8 or later.
+    - [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
 - An Integrated Development Environment (IDE) like IntelliJ IDEA, Eclipse, or VS Code.
 
 ### Installing
@@ -64,6 +65,8 @@ These instructions will help you get a copy of the project up and running on you
 #### Run using Maven
     mvn exec:java
     
+#### Run using Java
+    java -jar playsnake.jar
 
 ## Built With
 * Java
