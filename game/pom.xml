@@ -17,12 +17,12 @@
     <plugins>
         <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.3.0</version> <!-- You can use the latest version available -->
+            <version>3.3.0</version> 
             <configuration>
                 <archive>
                     <manifest>
                         <mainClass>snake.Main</mainClass>
-                        <!-- Replace Fully_Qualified_Main_Class_Name with your main class, e.g., com.example.Main -->
+                      
                     </manifest>
                 </archive>
                 <descriptorRefs>
@@ -31,8 +31,8 @@
             </configuration>
             <executions>
                 <execution>
-                    <id>make-assembly</id> <!-- this is used for an identifier of the execution -->
-                    <phase>package</phase> <!-- bind to the packaging phase -->
+                    <id>make-assembly</id> 
+                    <phase>package</phase> 
                     <goals>
                         <goal>single</goal>
                     </goals>
