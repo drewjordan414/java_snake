@@ -4,55 +4,55 @@
 // Import necessary classes (JPanel, Color, Dimension, Graphics, Point, ActionEvent, ActionListener, KeyAdapter, KeyEvent, Timer, FontMetrics)
 
 // Define class Board, extending JPanel and implementing ActionListener
-    // Declare constants for WIDTH, HEIGHT, and SCALE
+// Declare constants for WIDTH, HEIGHT, and SCALE
 
-    // Declare variables for snake, apple, timer, and gameOver flag
+// Declare variables for snake, apple, timer, and gameOver flag
 
-    // Define constructor for Board
-        // Set preferred size of the panel to WIDTH x HEIGHT
-        // Set background color to black
-        // Make the panel focusable
+// Define constructor for Board
+// Set preferred size of the panel to WIDTH x HEIGHT
+// Set background color to black
+// Make the panel focusable
 
-        // Call initGame method
-        // Add key listener to handle key presses
-            // If game is over and 'R' is pressed, call restartGame
-            // Otherwise, change the snake's direction based on arrow keys or WASD
+// Call initGame method
+// Add key listener to handle key presses
+// If game is over and 'R' is pressed, call restartGame
+// Otherwise, change the snake's direction based on arrow keys or WASD
 
-    // Define initGame method
-        // Initialize snake with starting length, scale, and board dimensions
-        // Call spawnApple method to place the first apple
-        // Set gameOver flag to false
-        // Set up and start a timer with a delay for game updates
+// Define initGame method
+// Initialize snake with starting length, scale, and board dimensions
+// Call spawnApple method to place the first apple
+// Set gameOver flag to false
+// Set up and start a timer with a delay for game updates
 
-    // Define spawnApple method
-        // Randomly generate x and y coordinates for the apple within the board boundaries
+// Define spawnApple method
+// Randomly generate x and y coordinates for the apple within the board boundaries
 
-    // Override paintComponent method from JPanel
-        // Call superclass paintComponent method
-        // Call draw method to render game elements
+// Override paintComponent method from JPanel
+// Call superclass paintComponent method
+// Call draw method to render game elements
 
-    // Define draw method
-        // If game is not over, draw the apple and the snake
-        // If game is over, call drawGameOver method
+// Define draw method
+// If game is not over, draw the apple and the snake
+// If game is over, call drawGameOver method
 
-    // Define drawGameOver method
-        // Display "Game Over. Press R to Restart" message centered on the board
+// Define drawGameOver method
+// Display "Game Over. Press R to Restart" message centered on the board
 
-    // Override actionPerformed method from ActionListener
-        // If game is not over, move snake, check for apple, and check for collisions
-        // Repaint the board
+// Override actionPerformed method from ActionListener
+// If game is not over, move snake, check for apple, and check for collisions
+// Repaint the board
 
-    // Define checkApple method
-        // Check if the snake's head is at the same position as the apple
-        // If so, grow the snake and spawn a new apple
+// Define checkApple method
+// Check if the snake's head is at the same position as the apple
+// If so, grow the snake and spawn a new apple
 
-    // Define checkCollisions method
-        // Check for collisions with the snake itself or the board boundaries
-        // Set gameOver flag to true if a collision occurs
+// Define checkCollisions method
+// Check for collisions with the snake itself or the board boundaries
+// Set gameOver flag to true if a collision occurs
 
-    // Define restartGame method
-        // If game is over, stop the timer, reset the snake, spawn an apple, reset gameOver flag
-        // Create a new timer and start it
+// Define restartGame method
+// If game is over, stop the timer, reset the snake, spawn an apple, reset gameOver flag
+// Create a new timer and start it
 
 package snake.components;
 
@@ -67,7 +67,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 import java.awt.FontMetrics;
-
 
 public class Board extends JPanel implements ActionListener {
     private final int WIDTH = 800;
@@ -97,19 +96,23 @@ public class Board extends JPanel implements ActionListener {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_UP:
                         case KeyEvent.VK_W:
-                            if (currentDirection != 2) snake.setDirection(0); // Up
+                            if (currentDirection != 2)
+                                snake.setDirection(0); // Up
                             break;
                         case KeyEvent.VK_RIGHT:
                         case KeyEvent.VK_D:
-                            if (currentDirection != 3) snake.setDirection(1); // Right
+                            if (currentDirection != 3)
+                                snake.setDirection(1); // Right
                             break;
                         case KeyEvent.VK_DOWN:
                         case KeyEvent.VK_S:
-                            if (currentDirection != 0) snake.setDirection(2); // Down
+                            if (currentDirection != 0)
+                                snake.setDirection(2); // Down
                             break;
                         case KeyEvent.VK_LEFT:
                         case KeyEvent.VK_A:
-                            if (currentDirection != 1) snake.setDirection(3); // Left
+                            if (currentDirection != 1)
+                                snake.setDirection(3); // Left
                             break;
                     }
                 }
@@ -142,7 +145,7 @@ public class Board extends JPanel implements ActionListener {
             // Draw the apple
             g.setColor(Color.RED);
             g.fillRect(apple.x, apple.y, SCALE, SCALE);
-    
+
             // Draw the snake
             g.setColor(Color.GREEN);
             for (Point p : snake.getSnakeParts()) {
@@ -153,7 +156,7 @@ public class Board extends JPanel implements ActionListener {
             drawGameOver(g);
         }
     }
-    
+
     private void drawGameOver(Graphics g) {
         String message = "Game Over. Press R to Restart";
         g.setColor(Color.RED);
@@ -197,23 +200,42 @@ public class Board extends JPanel implements ActionListener {
         }
 
     }
+    // count score and show on the board
+    public int scoreCounter() {
+        int score = 0;
+        if (snake.getHead().equals(apple)) {
+            score++;
+        }
+        return score;
+    }
+
+    // show score on the board
+    public void showScore(Graphics g) {
+        String message = "Score: " + scoreCounter();
+        g.setColor(Color.RED);
+        FontMetrics fm = g.getFontMetrics();
+        int x = (WIDTH - fm.stringWidth(message)) / 2;
+        int y = (HEIGHT / 2) + fm.getAscent();
+        g.drawString(message, 750, 50);
+         
+    }
+
 
     // button to restart game when game over is ture
     public void restartGame() {
-    if (gameOver) {
-        if (timer != null) {
-            timer.stop(); // Stop the existing timer
+        if (gameOver) {
+            if (timer != null) {
+                timer.stop(); // Stop the existing timer
+            }
+
+            snake = new Snake(3, SCALE, WIDTH, HEIGHT); // Reset the snake
+            spawnApple(); // Respawn the apple
+            gameOver = false; // Reset the game over flag
+
+            timer = new Timer(100, this); // Create a new timer with a constant delay
+            timer.start(); // Start the timer
         }
 
-        snake = new Snake(3, SCALE, WIDTH, HEIGHT); // Reset the snake
-        spawnApple(); // Respawn the apple
-        gameOver = false; // Reset the game over flag
-
-        timer = new Timer(100, this); // Create a new timer with a constant delay
-        timer.start(); // Start the timer
     }
-}
-
-
 
 }

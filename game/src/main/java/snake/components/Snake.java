@@ -126,7 +126,25 @@ public class Snake {
         return snakeParts.get(0);
     }
 
-    // Add other methods that might be useful
+    // snake speed
+    // public void setSpeed(){
+    //     if (score < 5) {
+    //         Board.setDelay(100);
+    //     } else if (score < 10) {
+    //         Board.setDelay(80);
+    //     } else if (score < 15) {
+    //         Board.setDelay(60);
+    //     } else if (score < 20) {
+    //         Board.setDelay(40);
+    //     } else if (score < 25) {
+    //         Board.setDelay(20);
+    //     } else {
+    //         Board.setDelay(10);
+    //     }
+    // }
+    
+    // initialize snake score
+    public int score = 0;
 
     public int getDirection() {
         return direction;
